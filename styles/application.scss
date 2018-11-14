@@ -1,11 +1,7 @@
-// This is the top-level scss file. Import all other files in here.
-<<<<<<< HEAD
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
+
 @import 'body';
 @import 'navbar';
 @import 'message';
-@import 'chatbar'
-=======
-@import 'home';
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
->>>>>>> 563730c4e942ecca420b31e29045a56367cb10f6
+@import 'chatbar';
