@@ -1,5 +1,5 @@
 {
-  "name": "Chatty-App",
+  "name": "chatty-App",
   "version": "1.0.0",
   "description": "single-page chat application that does not require user login",
   "scripts": {
