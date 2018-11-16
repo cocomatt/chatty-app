@@ -3,6 +3,7 @@ npm-debug.log
 .DS_Store
 dist
 original-css.txt
+test.js
 
 ### PhpStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm

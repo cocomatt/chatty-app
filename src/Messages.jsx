@@ -11,7 +11,7 @@ class Messages extends Component {
     const messageArray = this.props.messages.map(message => {
       const Message = UserMessage;
       return (<Message key={message.id} message={message}/>);
-    })
+    });
     console.log('messageArray', messageArray);
 
     return (
