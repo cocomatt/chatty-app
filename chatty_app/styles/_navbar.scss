@@ -1,0 +1,22 @@
+.navbar {
+  background: tomato;
+  border-bottom: 1px solid black;
+  height: 60px;
+  left: 0;
+  padding: 0 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.navbar-brand {
+  color: inherit;
+  display: block;
+  float: left;
+  font-weight: 700;
+  font-size: 28px;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
+  text-decoration: none;
+}
