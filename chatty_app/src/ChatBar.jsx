@@ -9,6 +9,7 @@ class ChatBar extends Component {
 
   onKeyPress(event) {
     if (event.key === 'Enter') {
+      // this.props.addNewUserMessage(this.props.name, event.target.value);
       this.onSubmit(event);
     }
   }

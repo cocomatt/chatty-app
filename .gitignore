@@ -4,6 +4,7 @@ npm-debug.log
 dist
 original-css.txt
 test.js
+build
 
 ### PhpStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
