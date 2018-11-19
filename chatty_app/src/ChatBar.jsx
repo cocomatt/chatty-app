@@ -18,7 +18,7 @@ class ChatBar extends Component {
   onSubmit(event) {
     console.log('OnSubmit');
     if ((event.target.value) && (event.target.className === 'chatbar-message')) {
-      this.props.addNewUserMessage({
+      this.props.addNewMessage({
         username: this.props.currentUser.name,
         content: event.target.value,
         type: 'UserMessage'
@@ -27,7 +27,7 @@ class ChatBar extends Component {
       this.setState({messageContent: ''});
     } else if ((event.target.value) && (event.target.className === 'chatbar-username')) {
       console.log('event.target.value: ', event.target.value);
-      this.props.addNewSystemMessage({
+      this.props.addNewMessage({
         content: `${this.props.currentUser.name} changed name to ${event.target.value}`,
         type: 'SystemMessage'
       });

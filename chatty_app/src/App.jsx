@@ -27,14 +27,9 @@ class App extends Component {
     };
   }
 
-  addNewUserMessage(newUserMessage) {
-    console.log('newUserMessage:', newUserMessage);
-    this.socket.send(JSON.stringify(newUserMessage));
-  }
-
-  addNewSystemMessage(newSystemMessage) {
-    console.log('newSystemMessage: ', newSystemMessage);
-    this.socket.send(JSON.stringify(newSystemMessage));
+  addNewMessage(newMessage) {
+    console.log('newMessage:', newMessage);
+    this.socket.send(JSON.stringify(newMessage));
   }
 
   changeUsername(newUsername) {
@@ -57,7 +52,7 @@ class App extends Component {
       <div>
         <NavBar />
         <Messages messages={this.state.messages}/>
-        <ChatBar currentUser={this.state.currentUser} addNewSystemMessage={this.addNewSystemMessage.bind(this)} addNewUserMessage={this.addNewUserMessage.bind(this)} changeUsername={this.changeUsername.bind(this)}/>
+        <ChatBar currentUser={this.state.currentUser} addNewMessage={this.addNewMessage.bind(this)} changeUsername={this.changeUsername.bind(this)}/>
       </div>
     );
   }
