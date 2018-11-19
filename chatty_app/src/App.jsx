@@ -9,11 +9,17 @@ class App extends Component {
     super(props);
     this.socket = new WebSocket('ws://localhost:3001', 'protocolOne');
     this.socket.onmessage = (event) => {
-      console.log('event under .onmessage: ', event);
-      let message = JSON.parse(event.data);
-      console.log('message***:', message);
-      const messages = this.state.messages.concat(message);
-      this.setState({messages});
+      console.log('event under .onmessage***: ', event);
+      const message = JSON.parse(event.data);
+      switch (message.type) {
+        case 'UserMessage':
+        case 'SystemMessage':
+          console.log('message***:', message);
+          const messages = this.state.messages.concat(message);
+          console.log('messagesSSSS: ', messages);
+          this.setState({messages});
+          break;
+      }
     };
     this.state = {
       currentUser: {name: 'Anonymous'},
@@ -24,6 +30,16 @@ class App extends Component {
   addNewUserMessage(newUserMessage) {
     console.log('newUserMessage:', newUserMessage);
     this.socket.send(JSON.stringify(newUserMessage));
+  }
+
+  addNewSystemMessage(newSystemMessage) {
+    console.log('newSystemMessage: ', newSystemMessage);
+    this.socket.send(JSON.stringify(newSystemMessage));
+  }
+
+  changeUsername(newUsername) {
+    console.log('newUsername:', newUsername);
+    this.socket.send(JSON.stringify(newUsername));
   }
 
   // componentDidMount() {
@@ -41,7 +57,7 @@ class App extends Component {
       <div>
         <NavBar />
         <Messages messages={this.state.messages}/>
-        <ChatBar currentUser={this.state.currentUser} addNewUserMessage={this.addNewUserMessage.bind(this)}/>
+        <ChatBar currentUser={this.state.currentUser} addNewSystemMessage={this.addNewSystemMessage.bind(this)} addNewUserMessage={this.addNewUserMessage.bind(this)} changeUsername={this.changeUsername.bind(this)}/>
       </div>
     );
   }
