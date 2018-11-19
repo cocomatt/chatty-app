@@ -26,16 +26,14 @@ class ChatBar extends Component {
       event.target.value = '';
       this.setState({messageContent: ''});
     } else if ((event.target.value) && (event.target.className === 'chatbar-username')) {
-      console.log('event.target.value: ', event.target.value);
       this.props.addNewMessage({
         content: `${this.props.currentUser.name} changed name to ${event.target.value}`,
         type: 'SystemMessage'
       });
-      console.log('addNewSystemMessage called');
       this.props.changeUsername({
         username: event.target.value,
+        type: 'nameChange'
       });
-      console.log('changeUsername called');
       this.props.currentUser.name = event.target.value;
       this.setState({username: event.target.value});
     }

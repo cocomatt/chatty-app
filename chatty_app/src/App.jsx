@@ -7,18 +7,22 @@ import ChatBar from './ChatBar.jsx';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.changeUsername = this.changeUsername.bind(this);
+    this.addNewMessage = this.addNewMessage.bind(this);
     this.socket = new WebSocket('ws://localhost:3001', 'protocolOne');
     this.socket.onmessage = (event) => {
-      console.log('event under .onmessage***: ', event);
       const message = JSON.parse(event.data);
       switch (message.type) {
         case 'UserMessage':
-        case 'SystemMessage':
-          console.log('message***:', message);
+        case 'SystemMessage': {
           const messages = this.state.messages.concat(message);
-          console.log('messagesSSSS: ', messages);
           this.setState({messages});
+        }
           break;
+        case 'nameChange':
+          break;
+        default:
+          throw new Error('Unknown event type ' + message.type);
       }
     };
     this.state = {
@@ -28,12 +32,10 @@ class App extends Component {
   }
 
   addNewMessage(newMessage) {
-    console.log('newMessage:', newMessage);
     this.socket.send(JSON.stringify(newMessage));
   }
 
   changeUsername(newUsername) {
-    console.log('newUsername:', newUsername);
     this.socket.send(JSON.stringify(newUsername));
   }
 
@@ -52,7 +54,7 @@ class App extends Component {
       <div>
         <NavBar />
         <Messages messages={this.state.messages}/>
-        <ChatBar currentUser={this.state.currentUser} addNewMessage={this.addNewMessage.bind(this)} changeUsername={this.changeUsername.bind(this)}/>
+        <ChatBar currentUser={this.state.currentUser} addNewMessage={this.addNewMessage} changeUsername={this.changeUsername}/>
       </div>
     );
   }
