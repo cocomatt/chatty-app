@@ -1,35 +1,41 @@
-// server.js
-
 const express = require('express');
+const WebSocket = require('ws');
 const SocketServer = require('ws').Server;
+const uuidv4 = require('uuid/v4');
 
-// Set the port to 3001
 const PORT = 3001;
 
-// Create a new express server
 const server = express()
-// Make the express server serve static assets (html, javascript, css) from the
-// public folder
+
 .use(express.static('public'))
 .listen(PORT, '0.0.0.0', 'localhost', () => console.log(`Listening on ${ PORT }`));
 
 // Create the WebSockets server
 const webSocketServer = new SocketServer({ server });
 
-// Set up a callback that will run when a client connects to the server
-// When a client connects they are assigned a socket, represented by
-// the ws parameter in the callback.
-
-webSocketServer.on('connection', function connection(clientSocket) {
+webSocketServer.on('connection', (clientSocket) => {
   console.log('Client connected');
-  clientSocket.on('message', function incoming(message) {
-    const parsedMessage = JSON.parse(message);
-    console.log('received: %s', parsedMessage);
-  });
+  clientSocket.on('message', function incoming(data) {
+    let message = JSON.parse(data);
+    console.log('received:', message);
+    message.id = uuidv4();
+    console.log('message to send to client:', message);
+    let newMessage = JSON.stringify(message);
+    console.log('newMessage to send to client (stringified):', newMessage);
+    webSocketServer.clients.forEach(function each(client) {
+      if (client.readyState === 1) {
+        client.send(newMessage);
+      }
+    });
 
-  clientSocket.send('Connected to server');
-// Set up a callback for when a client closes the socket. This usually means they
-// closed their browser.
+    // webSocketServer.broadcast = function broadcast(message) {
+    //   webSocketServer.clients.forEach(function each(client) {
+    //     if (client.readyState === WebSocket.OPEN) {
+    //       client.send(message);
+    //     }
+    //   });
+    // };
+  });
 
   clientSocket.on('close', () => console.log('Client disconnected'));
 });

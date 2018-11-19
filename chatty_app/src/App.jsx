@@ -8,49 +8,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.socket = new WebSocket('ws://localhost:3001', 'protocolOne');
+    this.socket.onmessage = (event) => {
+      console.log('event under .onmessage: ', event);
+      let message = JSON.parse(event.data);
+      console.log('message***:', message);
+      const messages = this.state.messages.concat(message);
+      this.setState({messages});
+    };
     this.state = {
-      currentUser: {name: 'Bob'}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [
-        {
-          id: 1,
-          username: 'Bob',
-          content: 'Has anyone seen my marbles?',
-          type: 'userMessage'
-        },
-        {
-          id: 2,
-          username: 'Anonymous',
-          content: 'No, I think you lost them. You lost your marbles Bob. You lost them for good.',
-          type: 'userMessage'
-        }
-        // {
-        //   id:'3',
-        //   content: 'Anonymous1 changed their name to nomnom.',
-        //   type: 'SystemMessage'
-        // }
-      ]
-    }
+      currentUser: {name: 'Anonymous'},
+      messages: []
+    };
   }
 
   addNewUserMessage(newUserMessage) {
     console.log('newUserMessage:', newUserMessage);
-    const messages = this.state.messages.concat(newUserMessage);
-    console.log('messages in addNewUserMessage:', messages);
-    this.setState(prevState => {
-      return {
-        currentUser: prevState.currentUser,
-        messages: messages
-      }
-    });
-    console.log('messages:', this.state.messages);
-    console.log('currentUser:', this.state.currentUser);
-    this.socket.send(JSON.stringify(`User ${newUserMessage.username} said ${newUserMessage.content}`));
+    this.socket.send(JSON.stringify(newUserMessage));
   }
 
-  componentDidMount() {
-    console.log('componentDidMount <App />');
-    console.log('Connected to Server');
-  }
+  // componentDidMount() {
+  //   console.log('componentDidMount <App />');
+  //   this.socket.onmessage = (event) => {
+  //     console.log('Connected to server');
+  //     console.log('event:', event);
+  //   }
+  //   // console.log('Connected to Server');
+  // }
 
   render() {
     console.log('Rendering <App/>');
