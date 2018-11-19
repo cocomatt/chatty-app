@@ -9,8 +9,11 @@ class Messages extends Component {
     console.log('Rendering <Messages/>');
 
     const messageArray = this.props.messages.map(message => {
-      const Message = UserMessage;
-      return (<Message key={message.id} message={message}/>);
+      if (message.type === 'UserMessage') {
+        return (<UserMessage key={message.id} message={message}/>);
+      } else if (message.type === 'SystemMessage') {
+        return (<SystemMessage key={message.id} message={message}/>);
+      }
     });
     console.log('messageArray', messageArray);
 
