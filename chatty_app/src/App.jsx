@@ -10,6 +10,7 @@ class App extends Component {
     this.changeUsername = this.changeUsername.bind(this);
     this.addNewMessage = this.addNewMessage.bind(this);
     this.state = {
+      userCount: 1,
       currentUser: {name: 'Anonymous'},
       messages: []
     };
@@ -28,12 +29,17 @@ class App extends Component {
     this.socket = new WebSocket('ws://localhost:3001', 'protocolOne');
     this.socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
+      console.log('message in componentDidMount:', message);
       switch (message.type) {
+        case 'UserCount': {
+          this.setState({userCount: message.userCount});
+          }
+          break;
         case 'UserMessage':
         case 'SystemMessage': {
           const messages = this.state.messages.concat(message);
           this.setState({messages});
-        }
+          }
           break;
         case 'nameChange':
           break;
@@ -47,7 +53,7 @@ class App extends Component {
     console.log('Rendering <App/>');
     return (
       <div>
-        <NavBar />
+        <NavBar userCount={this.state.userCount}/>
         <Messages messages={this.state.messages}/>
         <ChatBar currentUser={this.state.currentUser} addNewMessage={this.addNewMessage} changeUsername={this.changeUsername}/>
       </div>

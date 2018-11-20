@@ -9,14 +9,25 @@
   top: 0;
 }
 
-.navbar-brand {
-  color: inherit;
-  display: block;
-  float: left;
-  font-weight: 700;
-  font-size: 28px;
-  height: 60px;
-  line-height: 60px;
-  padding: 0 10px;
-  text-decoration: none;
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .navbar-brand {
+    color: inherit;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 28px;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 10px;
+    text-decoration: none;
+  }
+
+  .navbar-usercount {
+    display: inline-block;
+    margin-top: 50px;
+    font-size: 20px;
+  }
 }
