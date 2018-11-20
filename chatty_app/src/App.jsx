@@ -9,6 +9,22 @@ class App extends Component {
     super(props);
     this.changeUsername = this.changeUsername.bind(this);
     this.addNewMessage = this.addNewMessage.bind(this);
+    this.state = {
+      currentUser: {name: 'Anonymous'},
+      messages: []
+    };
+  }
+
+  addNewMessage(newMessage) {
+    this.socket.send(JSON.stringify(newMessage));
+  }
+
+  changeUsername(newUsername) {
+    this.socket.send(JSON.stringify(newUsername));
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount <App />');
     this.socket = new WebSocket('ws://localhost:3001', 'protocolOne');
     this.socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
@@ -24,29 +40,8 @@ class App extends Component {
         default:
           throw new Error('Unknown event type ' + message.type);
       }
-    };
-    this.state = {
-      currentUser: {name: 'Anonymous'},
-      messages: []
-    };
+    }
   }
-
-  addNewMessage(newMessage) {
-    this.socket.send(JSON.stringify(newMessage));
-  }
-
-  changeUsername(newUsername) {
-    this.socket.send(JSON.stringify(newUsername));
-  }
-
-  // componentDidMount() {
-  //   console.log('componentDidMount <App />');
-  //   this.socket.onmessage = (event) => {
-  //     console.log('Connected to server');
-  //     console.log('event:', event);
-  //   }
-  //   // console.log('Connected to Server');
-  // }
 
   render() {
     console.log('Rendering <App/>');

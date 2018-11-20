@@ -14,6 +14,7 @@ const server = express()
 const webSocketServer = new SocketServer({ server });
 
 webSocketServer.on('connection', (clientSocket) => {
+  console.log('Client connected');
   clientSocket.on('message', function incoming(data) {
     let message = JSON.parse(data);
     message.id = uuidv4();
