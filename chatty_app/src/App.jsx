@@ -11,7 +11,7 @@ class App extends Component {
     this.addNewMessage = this.addNewMessage.bind(this);
     this.state = {
       userCount: 1,
-      currentUser: {name: 'Anonymous'},
+      currentUser: {id: '', name: 'Anonymous', color: 'black'},
       messages: []
     };
   }
@@ -29,10 +29,18 @@ class App extends Component {
     this.socket = new WebSocket('ws://localhost:3001', 'protocolOne');
     this.socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
-      console.log('message in componentDidMount:', message);
       switch (message.type) {
         case 'UserCount': {
           this.setState({userCount: message.userCount});
+          }
+          break;
+        case 'CurrentUserIdandColor': {
+          const currentUser = {
+            id: message.currentUserId,
+            name: this.state.currentUser.name,
+            color: message.color
+          }
+          this.setState({currentUser: currentUser});
           }
           break;
         case 'UserMessage':
@@ -41,7 +49,7 @@ class App extends Component {
           this.setState({messages});
           }
           break;
-        case 'nameChange':
+        case 'NameChange':
           break;
         default:
           throw new Error('Unknown event type ' + message.type);
