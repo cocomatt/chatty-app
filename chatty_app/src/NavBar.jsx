@@ -8,12 +8,13 @@ class NavBar extends Component {
         <nav className="navbar">
           <span className="navbar-container">
             <a href="/" className="navbar-brand">Chatty</a>
-            <span className="navbar-userCount">Number of users online: {this.props.userCount}
-            </span>
+            <div className="navbar-userCount">Number of users online: {this.props.userCount}
+            </div>
           </span>
         </nav>
       </div>
     );
   }
 }
+
 export default NavBar;
