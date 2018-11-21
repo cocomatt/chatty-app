@@ -48,8 +48,12 @@ webSocketServer.on('connection', (clientSocket) => {
     let message = JSON.parse(data);
     message.id = uuidv4();
     let newMessage = JSON.stringify(message);
+
+    // webSocketServer.broadcast = function broadcast(data) ?????
+
     webSocketServer.clients.forEach(function each(client) {
       if (client.readyState === 1) {
+        console.log('newMessage:', newMessage);
         client.send(newMessage);
       }
     });
