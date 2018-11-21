@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+// import frenchieImage from '/frenchie.jpg_900x600.jpg';
+
 class UserMessage extends Component {
 
   // https://en.wikipedia.org/wiki/French_Bulldog#/media/File:Anna-Maria-Sacher-1908.jpg
@@ -9,22 +11,23 @@ class UserMessage extends Component {
   render() {
     console.log('Rendering <UserMessage/>');
     let content = this.props.message.content;
-    const images = content.match(/\b\S+\.(?:gif|jpg|png)\b/gi);
+    // const images = content.match(/\b\S+\.(?:gif|jpg|png)\b/gi);
     // const image = content.match(/\b\S+\.(?:gif|jpg|png)\b/gi);
     // let image = images[0];
     // console.log('image:', image)
     // const imageTrim = content.trim().match(/\b\S+\.(?:gif|jpg|png)\b/gi);
     // console.log('images with trim:', imageTrim);
-    if (images) {
-      let key = 'img' + this.props.message.id;
-      let src = images[0];
+    // if (images) {
+    if (content === 'Frenchie') {
+      let key = 'img-' + this.props.message.id;
+      let src = './frenchie.jpg_900x600.jpg';
       console.log('key:', key);
       console.log('src:', src);
       content = (
         <React.Fragment>
           {this.props.message.content}
           <hr/>
-          {<img key={key} src={src}/>}
+          {<img className="message-image" key={key} src={src}/>}
         </React.Fragment>
       )
     }
