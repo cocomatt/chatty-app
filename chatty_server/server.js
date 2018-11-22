@@ -5,7 +5,7 @@ const uuidv4 = require('uuid/v4');
 
 const PORT = 3001;
 const server = express()
-  .use(express.static('public'))
+  .use(express.static(__dirname + '/public'))
   .listen(PORT, '0.0.0.0', 'localhost', () => console.log(`Listening on ${ PORT }`));
 
 const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
