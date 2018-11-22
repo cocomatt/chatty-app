@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "single-page chat application that does not require user login",
   "scripts": {
-    "dev": "webpack --mode development ./src/index.js --output ./build/bundle.js",
-    "build": "webpack --mode production ./src/index.js --output ./build/bundle.js",
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --hot",
     "lint": "eslint --ext .jsx,.js src",
-    "start": "node server.js"
+    "start": "webpack-dev-server --mode development"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,8 @@
     "eslint-plugin-react": "6.9.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.5.0",
     "sass-loader": "^7.1.0",
     "sockjs-client": "^1.1.2",

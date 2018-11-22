@@ -22,6 +22,7 @@ function pickRandom(array) {
 function assignCurrentUserIdandColor(clientSocket, colors) {
   clientSocket.id = uuidv4();
   assignedCurrentUserId = clientSocket.id;
+  console.log('assignedCurrentUserId:', assignedCurrentUserId);
   clientConnections[clientSocket.id] = clientSocket;
   let color = pickRandom(colors);
   let currentUserIdandColor = JSON.stringify({type: 'CurrentUserIdandColor', currentUserId: assignedCurrentUserId, color: color});
