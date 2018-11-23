@@ -1,5 +1,5 @@
 const path = require('path');
-// const webpack = require('webpack');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -17,8 +17,8 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist/'),
+    filename: 'main.js'
   },
   module: {
     rules: [
@@ -52,7 +52,7 @@ module.exports = {
         })
       },
       {
-        test: /\.(png|jpg|gif)$/i,
+        test: /\.(jpe?g|gif|png|svg)$/i,
         use: [
           {
             loader: 'file-loader',

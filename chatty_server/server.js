@@ -41,10 +41,12 @@ function countUsers() {
 // Create the WebSockets server
 const webSocketServer = new SocketServer({ server });
 webSocketServer.options.clientTracking = false;
+
 webSocketServer.on('connection', (clientSocket) => {
   countUsers();
   assignCurrentUserIdandColor(clientSocket, colors);
   console.log('Client connected');
+
   clientSocket.on('message', function incoming(data) {
     let message = JSON.parse(data);
     message.id = uuidv4();
@@ -60,10 +62,24 @@ webSocketServer.on('connection', (clientSocket) => {
     });
   });
 
-  clientSocket.on('close', () => {
+  clientSocket.on('close', (event) => {
+    let exitedClientId = clientSocket.id;
+    let exitedClientMessageId = uuidv4();
+    let exitedClientMessage = {
+      type: 'ExitMessage',
+      currentUserId: exitedClientId,
+      id: exitedClientMessageId
+    };
+    let newExitedClientMessage = JSON.stringify(exitedClientMessage);
+      webSocketServer.clients.forEach(function each(client) {
+        if (client.readyState === 1) {
+          console.log('client.readyState:', client.readyState);
+          console.log('this is being called');
+          client.send(newExitedClientMessage);
+        }
+      });
     delete clientConnections[clientSocket.id];
     delete clientSocket.id;
     countUsers();
-    console.log('Client disconnected');
   });
 });

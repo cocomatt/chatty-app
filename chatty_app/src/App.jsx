@@ -9,6 +9,7 @@ class App extends Component {
     super(props);
     this.changeUsername = this.changeUsername.bind(this);
     this.addNewMessage = this.addNewMessage.bind(this);
+    this.getCurrentUsername = this.getCurrentUsername.bind(this);
     this.state = {
       userCount: 1,
       currentUser: {id: '', name: 'Anonymous', color: 'black'},
@@ -16,18 +17,25 @@ class App extends Component {
     };
   }
 
+  getCurrentUsername() {
+    let username = this.currentUser.name;
+    console.log('username from getCurrentUserName:', username)
+    return username;
+  }
+
   addNewMessage(newMessage) {
     this.socket.send(JSON.stringify(newMessage));
   }
 
-  changeUsername(newUsername) {
-    this.socket.send(JSON.stringify(newUsername));
+  changeUsername(newUsernameMessage) {
+    this.socket.send(JSON.stringify(newUsernameMessage));
   }
 
   componentDidMount() {
     console.log('componentDidMount <App />');
     this.socket = new WebSocket('ws://localhost:3001', 'protocolOne');
     this.socket.onmessage = (event) => {
+      console.log('event.data:', event.data);
       const message = JSON.parse(event.data);
       switch (message.type) {
         case 'UserCount': {
@@ -49,6 +57,13 @@ class App extends Component {
           this.setState({messages});
           }
           break;
+        case 'ExitMessage': {
+          let exitingUser = this.state.currentUser.name;
+          message.content = `${exitingUser} has left the chat`;
+          const messages = this.state.messages.concat(message);
+          this.setState({messages});
+          }
+          break;
         case 'NameChange':
           break;
         default:
@@ -61,7 +76,7 @@ class App extends Component {
     console.log('Rendering <App/>');
     return (
       <div>
-        <NavBar userCount={this.state.userCount}/>
+        <NavBar userCount={this.state.userCount} onClientExit={this.onClientExit}/>
         <Messages messages={this.state.messages}/>
         <ChatBar currentUser={this.state.currentUser} addNewMessage={this.addNewMessage} changeUsername={this.changeUsername}/>
       </div>

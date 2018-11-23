@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-// import frenchieImage from '/frenchie.jpg_900x600.jpg';
+import {frenchieImage} from '../images/frenchie.jpg_900x600.jpg';
 
 class UserMessage extends Component {
 
@@ -20,14 +20,13 @@ class UserMessage extends Component {
     // if (images) {
     if (content === 'Frenchie') {
       let key = 'img-' + this.props.message.id;
-      let src = './frenchie.jpg_900x600.jpg';
       console.log('key:', key);
-      console.log('src:', src);
+      console.log('src:', {frenchieImage});
       content = (
         <React.Fragment>
           {this.props.message.content}
           <hr/>
-          {<img className="message-image" key={key} src={src}/>}
+          {<img className="message-image" key={key} src={frenchieImage}/>}
         </React.Fragment>
       )
     }
