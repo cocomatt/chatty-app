@@ -13,6 +13,9 @@ module.exports = {
     port: 3000
   },
   entry: {main: './src/index.js' },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',

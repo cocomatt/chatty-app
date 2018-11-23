@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-import NavBar from './NavBar.jsx';
-import Messages from './Messages.jsx';
-import ChatBar from './ChatBar.jsx';
+import NavBar from './components/NavBar.jsx';
+import Messages from './components/Messages.jsx';
+import ChatBar from './components/ChatBar.jsx';
 
 class App extends Component {
   constructor(props) {
