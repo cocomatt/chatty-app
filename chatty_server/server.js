@@ -22,7 +22,6 @@ function pickRandom(array) {
 function assignCurrentUserIdandColor(clientSocket, colors) {
   clientSocket.id = uuidv4();
   assignedCurrentUserId = clientSocket.id;
-  console.log('assignedCurrentUserId:', assignedCurrentUserId);
   clientConnections[clientSocket.id] = clientSocket;
   let color = pickRandom(colors);
   let currentUserIdandColor = JSON.stringify({type: 'CurrentUserIdandColor', currentUserId: assignedCurrentUserId, color: color});
@@ -45,14 +44,15 @@ webSocketServer.options.clientTracking = false;
 webSocketServer.on('connection', (clientSocket) => {
   countUsers();
   assignCurrentUserIdandColor(clientSocket, colors);
-  console.log('Client connected');
+  clientSocket.username = 'Anonymous';
 
   clientSocket.on('message', function incoming(data) {
     let message = JSON.parse(data);
+    if (message.type === 'NameChange') {
+      clientSocket.username = message.username;
+    }
     message.id = uuidv4();
     let newMessage = JSON.stringify(message);
-
-    // webSocketServer.broadcast = function broadcast(data) ?????
 
     webSocketServer.clients.forEach(function each(client) {
       if (client.readyState === 1) {
@@ -63,19 +63,19 @@ webSocketServer.on('connection', (clientSocket) => {
   });
 
   clientSocket.on('close', (event) => {
-    let exitedClientId = clientSocket.id;
-    let exitedClientMessageId = uuidv4();
-    let exitedClientMessage = {
+    let exitingClientId = clientSocket.id;
+    let exitingClientUsername = clientSocket.username;
+    let exitingClientMessageId = uuidv4();
+    let exitingClientMessage = {
       type: 'ExitMessage',
-      currentUserId: exitedClientId,
-      id: exitedClientMessageId
+      exitingUserId: exitingClientId,
+      exitingUsername: exitingClientUsername,
+      id: exitingClientMessageId
     };
-    let newExitedClientMessage = JSON.stringify(exitedClientMessage);
+    let newExitingClientMessage = JSON.stringify(exitingClientMessage);
       webSocketServer.clients.forEach(function each(client) {
         if (client.readyState === 1) {
-          console.log('client.readyState:', client.readyState);
-          console.log('this is being called');
-          client.send(newExitedClientMessage);
+          client.send(newExitingClientMessage);
         }
       });
     delete clientConnections[clientSocket.id];

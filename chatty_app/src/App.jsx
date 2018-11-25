@@ -9,18 +9,11 @@ class App extends Component {
     super(props);
     this.changeUsername = this.changeUsername.bind(this);
     this.addNewMessage = this.addNewMessage.bind(this);
-    this.getCurrentUsername = this.getCurrentUsername.bind(this);
     this.state = {
       userCount: 1,
       currentUser: {id: '', name: 'Anonymous', color: 'black'},
       messages: []
     };
-  }
-
-  getCurrentUsername() {
-    let username = this.currentUser.name;
-    console.log('username from getCurrentUserName:', username)
-    return username;
   }
 
   addNewMessage(newMessage) {
@@ -58,8 +51,9 @@ class App extends Component {
           }
           break;
         case 'ExitMessage': {
-          let exitingUser = this.state.currentUser.name;
-          message.content = `${exitingUser} has left the chat`;
+          let exitingUserId = message.exitingUserId;
+          let exitingUsername = message.exitingUsername;
+          message.content = `${exitingUsername} has left the chat`;
           const messages = this.state.messages.concat(message);
           this.setState({messages});
           }

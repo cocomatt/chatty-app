@@ -4,7 +4,7 @@
   "description": "single-page chat application that does not require user login",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack-dev-server --hot",
+    "dev": "webpack-dev-server",
     "lint": "eslint --ext .jsx,.js src",
     "start": "webpack-dev-server --mode development"
   },

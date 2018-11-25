@@ -20,6 +20,7 @@ class ChatBar extends Component {
     if ((event.target.value) && (event.target.className === 'chatbar-message')) {
       this.props.addNewMessage({
         username: this.props.currentUser.name,
+        user_id: this.props.currentUser.id,
         color: this.props.currentUser.color,
         content: event.target.value,
         type: 'UserMessage'
@@ -28,10 +29,13 @@ class ChatBar extends Component {
       this.setState({messageContent: ''});
     } else if ((event.target.value) && (event.target.className === 'chatbar-username')) {
       this.props.addNewMessage({
+        user_id: this.props.currentUser.id,
         content: `${this.props.currentUser.name} changed name to ${event.target.value}`,
         type: 'SystemMessage'
       });
+      console.log('onSubmit changeUsername')
       this.props.changeUsername({
+        user_id: this.props.currentUser.id,
         username: event.target.value,
         type: 'NameChange'
       });
