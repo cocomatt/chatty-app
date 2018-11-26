@@ -4,9 +4,9 @@
   "description": "single-page chat application that does not require user login",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dashboard -- webpack-dev-server --hot --watch --mode development",
     "lint": "eslint --ext .jsx,.js src",
-    "start": "webpack-dev-server --mode development"
+    "start": "webpack-dev-server --watch --progress --mode development"
   },
   "repository": {
     "type": "git",
@@ -15,7 +15,6 @@
   "keywords": [
     "react",
     "reactjs",
-    "boilerplate",
     "reload",
     "live",
     "edit",
@@ -50,6 +49,7 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.26.0",
     "webpack-cli": "^3.1.2",
+    "webpack-dashboard": "^2.0.0",
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {

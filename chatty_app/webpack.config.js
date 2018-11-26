@@ -2,22 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
   mode: 'development',
-  devServer: {
-    contentBase: path.join(__dirname, '/dist/'),
-    inline: true,
-    // hot: true,
-    host: '0.0.0.0',
-    port: 3000
-  },
   entry: {main: './src/index.js' },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
   output: {
-    path: path.resolve(__dirname, 'dist/'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'main.js'
   },
   module: {
@@ -64,15 +55,34 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['.js', '.json', '.jsx', '.css']
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    inline: true,
+    hot: true,
+    host: '0.0.0.0',
+    port: 3000
+  },
   plugins: [
     new HtmlWebpackPlugin({
       inject: false,
       hash: false,
-      template: './src/index.html',
+      template: './public/index.html',
       filename: './index.html'
     }),
-    new ExtractTextPlugin(
-      {filename: 'style.css'}
-    ),
-  ]
+    new ExtractTextPlugin({
+      filename: 'style.css',
+      allChunks: true
+    }),
+    new webpack.HotModuleReplacementPlugin({ port: 3000 }),
+    new DashboardPlugin()
+  ],
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000,
+    ignored: /node_modules/
+  }
 };
