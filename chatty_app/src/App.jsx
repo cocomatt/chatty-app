@@ -3,9 +3,6 @@ import React, {Component} from 'react';
 import NavBar from './components/NavBar.jsx';
 import Messages from './components/Messages.jsx';
 import ChatBar from './components/ChatBar.jsx';
-import frenchie from './images/frenchie.jpg_900x600.jpg';
-
-console.log('frenchie:', frenchie);
 
 class App extends Component {
   constructor(props) {
