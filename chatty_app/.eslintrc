@@ -19,6 +19,13 @@
     "react/prop-types": 0,
     "no-console": 0
   },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
+  },
   "plugins": [
     "react"
   ],

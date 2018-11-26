@@ -1,8 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
@@ -66,6 +65,8 @@ const config = {
           {
             loader: 'file-loader',
             options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/',
               limit: 8192
             }
           }
@@ -76,16 +77,19 @@ const config = {
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.css', '.scss']
   },
-  devtool: 'eval-source-map',
+  devtool: false,
+  // devtool: 'eval-source-map',
   devServer: {
     contentBase: './dist',
-    // contentBase: path.join(__dirname, 'public'),
     inline: true,
     hot: true,
     host: '0.0.0.0',
     port: 3000
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin({
+      port: 3000
+    }),
     new HtmlWebpackPlugin({
       inject: false,
       hash: false,
@@ -96,11 +100,7 @@ const config = {
       filename: 'style.css',
       allChunks: true
     }),
-    new webpack.HotModuleReplacementPlugin({
-      port: 3000
-    }),
     new MiniCssExtractPlugin(),
-    new CleanWebpackPlugin(['dist']),
     new DashboardPlugin()
   ],
   watch: true,
