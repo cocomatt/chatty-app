@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import NavBar from './components/NavBar.jsx';
 import Messages from './components/Messages.jsx';
+import UserList from './components/UserList.jsx';
 import ChatBar from './components/ChatBar.jsx';
 
 class App extends Component {
@@ -72,6 +73,7 @@ class App extends Component {
       <div>
         <NavBar userCount={this.state.userCount} onClientExit={this.onClientExit}/>
         <Messages messages={this.state.messages}/>
+        <UserList />
         <ChatBar currentUser={this.state.currentUser} addNewMessage={this.addNewMessage} changeUsername={this.changeUsername}/>
       </div>
     );

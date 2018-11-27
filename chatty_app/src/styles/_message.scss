@@ -1,29 +1,34 @@
-.message {
-  display: flex;
-  padding: 5px;
-}
+.messages {
+  display: inline-block;
+  width: 400px;
 
-.message-notification {
-  font-style: italic;
-  padding: 5px 20px;
-}
+  .message {
+    display: flex;
+    padding: 5px;
+  }
 
-.message-content,
-.message-username {
-  overflow: hidden;
-  margin: 5px;
-  padding: 0 10px;
-}
+  .message-notification {
+    font-style: italic;
+    padding: 5px 20px;
+  }
 
-.message-content {
-  flex: 8;
-}
+  .message-content,
+  .message-username {
+    overflow: hidden;
+    margin: 5px;
+    padding: 0 10px;
+  }
 
-.message-username {
-  flex: 2;
-  font-weight: 700;
-}
+  .message-content {
+    flex: 8;
+  }
 
-.message-image {
-  max-width: 60vw;
+  .message-username {
+    flex: 2;
+    font-weight: 700;
+  }
+
+  .message-image {
+    max-width: 60vw;
+  }
 }

@@ -1,0 +1,20 @@
+.userlist {
+  display: inline-block;
+  position: fixed;
+  width: 175px;
+  padding: 5px;
+  background-color: #333333;
+  right: 0;
+  top: 60px;
+  bottom: 60px;
+
+  .userlist-title {
+    color: white;
+    text-align: center;
+  }
+
+  .user-in-list {
+    list-style-type: none;
+    color: white;
+  }
+}
