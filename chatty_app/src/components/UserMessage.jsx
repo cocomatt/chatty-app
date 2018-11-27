@@ -3,6 +3,12 @@ import React, {Component} from 'react';
 import frenchiejpg from '../assets/frenchie_900x600.jpg';
 import frenchiegif from '../assets/frenchie.gif';
 
+// import(/* webpackMode: "lazy" */ `assets/images/${fileName}.${ext}`);
+// import(/* webpackMode: "lazy" */ `assets/images/${frenchie}.gif`);
+
+// import(/* webpackMode: "lazy" */ `assets/images/${frenchie_900x600}.jpg`);
+// import(/* webpackMode: "lazy" */ `assets/images/${frenchie}.gif`);
+
 class UserMessage extends Component {
 
   // https://www.sciencedaily.com/images/2018/05/180502220025_1_900x600.jpg
