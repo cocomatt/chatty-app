@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 class UserMessage extends Component {
 
   // https://www.sciencedaily.com/images/2018/05/180502220025_1_900x600.jpg
+  // https://tenor.com/view/bulldog-bulldogs-dog-dogs-cute-gif-5452641
   // https://tenor.com/view/dog-huh-what-zoom-cute-gif-10479602
   // https://tenor.com/R8n0.gif
 
@@ -13,13 +14,11 @@ class UserMessage extends Component {
     if (image) {
       let key = 'img-' + this.props.message.id;
       let src = image;
-      console.log('key:', key);
-      console.log('src:', src);
       content = (
         <div>
           {this.props.message.content}
           <hr/>
-          <img className="message-image" key={key} src={src}/>
+          <img className="message-image" key={key} src={src} alt={src}/>
           <hr/>
         </div>
       )
