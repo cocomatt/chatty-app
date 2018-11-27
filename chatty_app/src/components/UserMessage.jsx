@@ -1,42 +1,25 @@
 import React, {Component} from 'react';
 
-import frenchiejpg from '../assets/frenchie_900x600.jpg';
-import frenchiegif from '../assets/frenchie.gif';
-
-// import(/* webpackMode: "lazy" */ `assets/images/${fileName}.${ext}`);
-// import(/* webpackMode: "lazy" */ `assets/images/${frenchie}.gif`);
-
-// import(/* webpackMode: "lazy" */ `assets/images/${frenchie_900x600}.jpg`);
-// import(/* webpackMode: "lazy" */ `assets/images/${frenchie}.gif`);
-
 class UserMessage extends Component {
 
   // https://www.sciencedaily.com/images/2018/05/180502220025_1_900x600.jpg
+  // https://tenor.com/view/dog-huh-what-zoom-cute-gif-10479602
+  // https://tenor.com/R8n0.gif
 
   render() {
     console.log('Rendering <UserMessage/>');
     let content = this.props.message.content;
-    if (content === 'Frenchie') {
+    let image = content.trim().match(/\b\S+\.(?:gif|jpg|png)\b/gi);
+    if (image) {
       let key = 'img-' + this.props.message.id;
+      let src = image;
       console.log('key:', key);
-      console.log('src:', frenchiejpg);
+      console.log('src:', src);
       content = (
         <div>
           {this.props.message.content}
           <hr/>
-          <img className="message-image" key={key} src={frenchiejpg}/>
-          <hr/>
-        </div>
-      )
-    } else if (content === 'frenchie') {
-      let key = 'img-' + this.props.message.id;
-      console.log('key:', key);
-      console.log('src:', frenchiegif);
-      content = (
-        <div>
-          {this.props.message.content}
-          <hr/>
-          <img className="message-image" key={key} src={frenchiegif}/>
+          <img className="message-image" key={key} src={src}/>
           <hr/>
         </div>
       )
@@ -55,7 +38,5 @@ class UserMessage extends Component {
     );
   }
 }
-
-// {images.map((image, index) => <img key={index} src={image}/>)}
 
 export default UserMessage;

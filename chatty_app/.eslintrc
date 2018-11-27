@@ -4,7 +4,7 @@
   "parserOptions": {
     "ecmaVersion": 9,
     "sourceType": "module",
-    "allowImportExportEverywhere": false,
+    "allowImportExportEverywhere": true,
     "codeFrame": false,
     "ecmaFeatures": {
       "jsx": true
@@ -14,7 +14,7 @@
   "env": {
     "es6": true,
     "browser": true,
-    "node": true,
+    "node": true
   },
   "rules": {
     "quotes": [2, "single"],
@@ -29,10 +29,13 @@
     "no-console": 0
   },
   "settings": {
+    "react": {
+      "version": "15.4.2"
+    },
     "import/ignore": ["node_modules"],
     "import/resolver": {
       "webpack": {
-        "config": './webpack.config.js'
+        "config": "./webpack.config.js"
       }
     }
   }
