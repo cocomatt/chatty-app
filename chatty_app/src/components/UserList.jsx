@@ -3,15 +3,20 @@ import React, {Component} from 'react';
 class UserList extends Component {
   render() {
     console.log('Rendering <UserList/>');
+    console.log('this.props:', this.props);
+    // const userArray = this.props.users.map(user => {
+    //   return (<UserList key={user.id} user={user}/>);
+    // });
+
+    const userArray = 'User 1';
+
+    console.log('userArray: ', userArray);
+
     return (
       <div>
         <div className="userlist">
           <h4 className="userlist-title">Chatty Cathy User List</h4>
-          <ul>
-            <li className="user-in-list">User 1</li>
-            <li className="user-in-list">User 2</li>
-            <li className="user-in-list">User 3</li>
-          </ul>
+          <span className="userlist-name" users={userArray} />
         </div>
       </div>
     );

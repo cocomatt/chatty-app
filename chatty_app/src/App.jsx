@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       userCount: 1,
       currentUser: {id: '', name: 'Anonymous', color: 'black'},
+      users: [],
       messages: []
     };
   }

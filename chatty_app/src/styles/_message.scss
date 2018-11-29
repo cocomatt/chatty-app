@@ -1,6 +1,6 @@
 .messages {
   display: inline-block;
-  width: 400px;
+  width: 75vw;
 
   .message {
     display: flex;
@@ -29,6 +29,6 @@
   }
 
   .message-image {
-    max-width: 60vw;
+    max-width: 100%;
   }
 }
